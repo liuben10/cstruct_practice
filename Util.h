@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+#pragma once
+
+char * nullTerminated(char * src, int N);
 
 int * copyNewBuf(int * srcBuf, int srcIdx, int amountToCopy) {
   int * result = malloc(sizeof(int) * amountToCopy);
@@ -15,6 +18,21 @@ void copyIntBuf(int * srcBuf, int srcIdx, int * destBuf, int destBufIdx, int amo
   for(int i = 0; i < amountToCopy; i++) {
     destBuf[i + destBufIdx] = srcBuf[srcIdx + i];
   }
+}
+
+void copyCharBuf(char * srcBuf, int srcIdx, char * destBuf, int destBufIdx, int amountToCopy) {
+  for(int i = 0; i < amountToCopy; i++) {
+    destBuf[i + destBufIdx] = srcBuf[srcIdx + i];
+  }
+}
+
+char * nullTerminated(char * src, int N) {
+  char * result = malloc(sizeof(char) * N+1);
+  for(int i = 0; i < N; i++) {
+    result[i] = src[i];
+  }
+  result[N] = '\0';
+  return result;
 }
 
 int numDigits(int n) {

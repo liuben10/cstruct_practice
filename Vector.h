@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Util.h"
+#include "String.h"
+#pragma once
 
 #define DEFAULT_BUFSIZE 10;
 
@@ -35,6 +37,7 @@ int length_IntVector(struct IntVector * vector) {
   return vector->tail;
 }
 
+
 int sizeOfIntsInVector(struct IntVector * vector) {
   int digitsLength = 0;
   for(int i = 0; i < vector->length(vector); i++) {
@@ -44,16 +47,15 @@ int sizeOfIntsInVector(struct IntVector * vector) {
 }
 
 char * toString_IntVector(struct IntVector * vector) {
-  int charBufSize = vector->length(vector) * 2 + sizeOfIntsInVector(vector);
-  char * res = malloc(sizeof(char) * charBufSize+1);
-  for(int i = 0; i < vector->length(vector); i++) {
-    res[i] = vector->buf[i];
+  String * resultString = newString();
+  for(int i = 0; i < vector->tail; i++) {
+    resultString->appendBulk(resultString, itoa(vector->buf[i]), vector->tail);
+    resultString->appendBulk(resultString, ", ", 2);
   }
-  res[vector->length(vector)] = '\0';
-  return res;
+  return resultString->toString(*resultString);
 }
 
-int get(struct IntVector * vector, int idx) {
+int get_Vector(struct IntVector * vector, int idx) {
   return vector->buf[idx];
 }
 
@@ -74,6 +76,7 @@ struct IntVector * newVector() {
   result->remove = &remove_IntVector;
   result->toString = &toString_IntVector;
   result->length = &length_IntVector;
+  result->get = &get_Vector;
   result->size = DEFAULT_BUFSIZE;
   result->tail = 0;
   result->buf = malloc(sizeof(int) * result->size);
