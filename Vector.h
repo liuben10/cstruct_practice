@@ -19,17 +19,14 @@ typedef struct IntVector {
 
 
 void add_IntVector(struct IntVector * vector, int element) {
-  if (vector->tail < vector->size) {
-    vector->buf[vector->tail] = element;
-    vector->tail += 1;
-  } else {
-    int oldSize = vector->size;
-    vector->size = vector->size * 2 + 1;
-    int * newBuf = malloc(sizeof(int) * vector->size);
-    copyIntBuf(vector->buf, 0, newBuf, 0, oldSize);
+  vector->buf[vector->tail] = element;
+  vector->tail += 1;
+  if (vector->tail >= vector->size) {
+    int newVectorSize = vector->size * 2 + 1;
+    int * newBuf = malloc(sizeof(int) * newVectorSize);
+    copyIntBuf(newBuf, 0, vector->buf, 0, vector->size);
     vector->buf = newBuf;
-    vector->buf[vector->tail] = element;
-    vector->tail += 1;
+    vector->size = newVectorSize;
   }
 }
 
