@@ -14,15 +14,15 @@ int * copyNewBuf(int * srcBuf, int srcIdx, int amountToCopy) {
   return result;		     
 }
 
-void copyIntBuf(int * srcBuf, int srcIdx, int * destBuf, int destBufIdx, int amountToCopy) {
+void copyIntBuf(int * destBuf, int destIdx, int * srcBuf, int srcIdx, int amountToCopy) {
   for(int i = 0; i < amountToCopy; i++) {
-    destBuf[i + destBufIdx] = srcBuf[srcIdx + i];
+    destBuf[i + destIdx] = srcBuf[srcIdx + i];
   }
 }
 
-void copyCharBuf(char * srcBuf, int srcIdx, char * destBuf, int destBufIdx, int amountToCopy) {
+void copyCharBuf(char * destBuf, int destIdx, char * srcBuf, int srcIdx, int amountToCopy) {
   for(int i = 0; i < amountToCopy; i++) {
-    destBuf[i + destBufIdx] = srcBuf[srcIdx + i];
+    destBuf[i + destIdx] = srcBuf[srcIdx + i];
   }
 }
 

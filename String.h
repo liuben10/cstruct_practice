@@ -21,8 +21,11 @@ void append_String(struct String * src, char c) {
   src->buf[src->tail] = c;
   src->tail += 1;
   if (src->tail >= src->bufsize) {
-    char * newBuf = malloc(sizeof(char) * src->bufsize * 2 + 1);
+    int newBufSize = src->bufsize * 2 + 1;
+    char * newBuf = malloc(sizeof(char) * newBufSize);
     copyCharBuf(newBuf, 0, src->buf, 0, src->bufsize);
+    src->buf = newBuf;
+    src->bufsize = newBufSize;
   }
 }
 

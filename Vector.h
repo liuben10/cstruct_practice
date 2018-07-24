@@ -48,12 +48,13 @@ int sizeOfIntsInVector(struct IntVector * vector) {
 
 char * toString_IntVector(struct IntVector * vector) {
   String * resultString = newString();
-  for(int i = 0; i < vector->tail; i++) {
-    resultString->appendBulk(resultString, itoa(vector->buf[i]), vector->tail);
+  for(int i = 0; i < vector->tail; i++) {  
+    resultString->appendBulk(resultString, itoa(vector->buf[i]), numDigits(vector->buf[i]));
     resultString->appendBulk(resultString, ", ", 2);
   }
   return resultString->toString(*resultString);
 }
+
 
 int get_Vector(struct IntVector * vector, int idx) {
   return vector->buf[idx];
