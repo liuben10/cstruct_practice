@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Vector.h"
+#include "LinkedList.h"
 
-
-int main() {
+void testVector() {
   IntVector * vector = newVector();
   vector->add(vector, 12);
   vector->add(vector, 13);
@@ -17,7 +17,23 @@ int main() {
   vector->add(vector, 2);
   vector->add(vector, 3);
   printf("Vector=%s\n", vector->toString(vector));
-  
 
+  int removed = vector->remove(vector);
+  printf("Removed=%d\n", removed);
+  printf("Vector=%s\n", vector->toString(vector)); 
+}
+
+void testLinkedList() {
+  SinglyLinkedList *sll = newSinglyLinkedList();
+  sll->add(sll, fromCharBuf("1", 1));
+  sll->add(sll, fromCharBuf("2", 1));
+  sll->add(sll, fromCharBuf("123", 3));
+
+  printf("LL=%s\n", sll->toString(sll)->buf);
+}
+
+int main() {
+  testLinkedList();
+  
   return 0;
 }

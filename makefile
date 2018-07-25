@@ -1,4 +1,4 @@
-HEADERS=Util.h	Vector.h String.h
+HEADERS=Util.h	Vector.h	String.h	LinkedList.h
 
 default:	compile
 

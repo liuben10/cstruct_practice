@@ -25,6 +25,7 @@ void add_IntVector(struct IntVector * vector, int element) {
     int newVectorSize = vector->size * 2 + 1;
     int * newBuf = malloc(sizeof(int) * newVectorSize);
     copyIntBuf(newBuf, 0, vector->buf, 0, vector->size);
+    free(vector->buf);
     vector->buf = newBuf;
     vector->size = newVectorSize;
   }
