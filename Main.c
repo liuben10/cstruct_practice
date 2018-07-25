@@ -25,9 +25,10 @@ void testVector() {
 
 void testLinkedList() {
   SinglyLinkedList *sll = newSinglyLinkedList();
-  sll->add(sll, fromCharBuf("1", 1));
-  sll->add(sll, fromCharBuf("2", 1));
-  sll->add(sll, fromCharBuf("123", 3));
+  sll
+    ->add(sll, fromCharBuf("1", 1))
+    ->add(sll, fromCharBuf("2", 1))
+    ->add(sll, fromCharBuf("123", 3));
 
   printf("LL=%s\n", sll->toString(sll)->buf);
 }

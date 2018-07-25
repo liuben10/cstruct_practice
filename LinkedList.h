@@ -11,7 +11,7 @@ typedef struct SinglyLinkedList {
   struct SLLNode *hp;
   struct SLLNode *tp;
   int size;
-  void(*add)(struct SinglyLinkedList *this, struct String *val);
+  struct SinglyLinkedList*(*add)(struct SinglyLinkedList *this, struct String *val);
   struct String*(*toString)(struct SinglyLinkedList *this);
 } SinglyLinkedList;
 
@@ -20,7 +20,7 @@ typedef struct DoublyLinkedList {
   struct DLLNode *hp;
   struct DLLNode *tp;
   int size;
-  void(*add)(struct DoublyLinkedList *this, struct String *val);
+  struct DoublyLinkedList*(*add)(struct DoublyLinkedList *this, struct String *val);
   struct String*(*toString)(struct DoublyLinkedList *this);
 } DoublyLinkedList;
 
@@ -50,9 +50,9 @@ struct SLLNode * newSLLNode(struct String *val);
 
 struct DLLNode * newDLLNode(struct String *val);
 
-void add_SinglyLinkedList(struct SinglyLinkedList *this, struct String *val);
+struct SinglyLinkedList * add_SinglyLinkedList(struct SinglyLinkedList *this, struct String *val);
 
-void add_DoublyLinkedList(struct DoublyLinkedList *this, struct String *val);
+struct DoublyLinkedList * add_DoublyLinkedList(struct DoublyLinkedList *this, struct String *val);
 
 struct String *toString_SinglyLinkedList(struct SinglyLinkedList *this);
 
@@ -60,19 +60,19 @@ struct String *toString_DoublyLinkedList(struct DoublyLinkedList *this);
 
 // ---------------------Method Implementations----------------------
 
-void add_SinglyLinkedList(struct SinglyLinkedList *this, struct String *val) {
+struct SinglyLinkedList * add_SinglyLinkedList(struct SinglyLinkedList *this, struct String *val) {
   if (this->hp == NULL) {
     this->tp = newSLLNode(val);
     this->hp = this->tp;
   } else {
-    printf("Value of tp (%s), and hp (%s)\n", this->tp->val->toString(*this->tp->val), this->hp->val->toString(*this->hp->val));
     this->tp->next = newSLLNode(val);
     this->tp = this->tp->next;
     this->size += 1;
   }
+  return this;
 }
 
-void add_DoublyLinkedList(struct DoublyLinkedList *this, struct String *val) {
+struct DoublyLinkedList * add_DoublyLinkedList(struct DoublyLinkedList *this, struct String *val) {
   if (this->hp == NULL) {
     this->tp = newDLLNode(val);
     this->hp = this->tp;
@@ -81,6 +81,7 @@ void add_DoublyLinkedList(struct DoublyLinkedList *this, struct String *val) {
     this->tp = this->tp->next;
     this->size += 1;
   }
+  return this;
 }
 
 struct SLLNode * emptySLLNode() {
@@ -110,7 +111,6 @@ struct String *toString_SinglyLinkedList(struct SinglyLinkedList *this) {
   SLLNode * iter = this->hp;
   String * result = newString();
   while(iter != NULL) {
-    printf("value=%s\n", iter->val->toString(*iter->val));
     result->append(result, iter->val);
     result->appendBulk(result, "->", 2);
 
