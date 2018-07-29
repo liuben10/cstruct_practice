@@ -39,6 +39,8 @@ typedef struct DLLNode {
 
 // ----------------------Methods Declarations-----------------------
 
+int hasCycle_SinglyLinkedList(struct SinglyLinkedList *sll);
+
 struct SinglyLinkedList * newSinglyLinkedList();
 
 struct DoublyLinkedList * newDoublyLinkedList();
@@ -62,6 +64,26 @@ struct String *toString_DoublyLinkedList(struct DoublyLinkedList *this);
 void reverse_SinglyLinkedLists(struct SinglyLinkedList *this);
 
 // ---------------------Method Implementations----------------------
+
+int hasCycle_SinglyLinkedList(struct SinglyLinkedList *sll) {
+  SLLNode *slowPtr = sll->hp;
+  SLLNode *fastPtr = NULL;
+  if (slowPtr->next != NULL) {
+    fastPtr = slowPtr->next;
+    while (fastPtr != NULL) {
+      if (fastPtr == slowPtr) {
+	return 1;
+      }
+      if (fastPtr->next != NULL) {
+	fastPtr = fastPtr->next->next;
+      }
+      slowPtr = slowPtr->next;
+    }
+    return 0;
+  } else {
+    return 0;
+  }
+}
 
 struct SinglyLinkedList * add_SinglyLinkedList(struct SinglyLinkedList *this, struct String *val) {
   if (this->hp == NULL) {

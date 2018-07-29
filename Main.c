@@ -45,8 +45,28 @@ void testLinkedListReverse() {
   printf("LL=%s\n", sll->toString(sll)->buf);
 }
 
+void testHasCycle() {
+  SinglyLinkedList *sll = newSinglyLinkedList();
+  SLLNode *n1 = newSLLNode(fromCharBuf("123", 3));
+  SLLNode *n2 = newSLLNode(fromCharBuf("4", 1));
+  SLLNode *n5 = newSLLNode(fromCharBuf("2", 1));
+  sll->hp = n5;
+  sll->hp->next = n2;
+  sll->hp->next->next = n1;
+  int hasCycle = hasCycle_SinglyLinkedList(sll);
+
+  printf("\nHas Cycle?: %d\n", hasCycle);
+}
+
+
+void testDoublyLinkedList() {
+  DoublyLinkedList *dll = newDoublyLinkedList();
+  dll->add(dll, fromCharBuf("123", 3))->add(dll, fromCharBuf("1", 1));
+  printf("DLL=%s\n", dll->toString(dll)->buf);
+}
+
 int main() {
-  testLinkedListReverse();
-  
+  testDoublyLinkedList();
+  testHasCycle();
   return 0;
 }
