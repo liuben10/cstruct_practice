@@ -13,6 +13,7 @@ typedef struct SinglyLinkedList {
   int size;
   struct SinglyLinkedList*(*add)(struct SinglyLinkedList *this, struct String *val);
   struct String*(*toString)(struct SinglyLinkedList *this);
+  void(*reverse)(struct SinglyLinkedList *this);
 } SinglyLinkedList;
 
 
@@ -58,6 +59,8 @@ struct String *toString_SinglyLinkedList(struct SinglyLinkedList *this);
 
 struct String *toString_DoublyLinkedList(struct DoublyLinkedList *this);
 
+void reverse_SinglyLinkedLists(struct SinglyLinkedList *this);
+
 // ---------------------Method Implementations----------------------
 
 struct SinglyLinkedList * add_SinglyLinkedList(struct SinglyLinkedList *this, struct String *val) {
@@ -70,6 +73,23 @@ struct SinglyLinkedList * add_SinglyLinkedList(struct SinglyLinkedList *this, st
     this->size += 1;
   }
   return this;
+}
+
+struct SLLNode * reverse_SinglyLinkedListHelper(struct SinglyLinkedList *this, struct SLLNode *next) {
+  if (next->next == NULL) {
+    this->hp = next;
+    return next;
+  } else {
+    SLLNode *previous = reverse_SinglyLinkedListHelper(this, next->next);
+    previous->next = next;
+    next->next = NULL;
+    return next;
+  }
+}
+
+void reverse_SinglyLinkedList(struct SinglyLinkedList *this) {
+  SLLNode *reversedTail = reverse_SinglyLinkedListHelper(this, this->hp);
+  this->tp = reversedTail;
 }
 
 struct DoublyLinkedList * add_DoublyLinkedList(struct DoublyLinkedList *this, struct String *val) {
@@ -140,6 +160,7 @@ struct SinglyLinkedList * newSinglyLinkedList() {
   newList->size = 0;
   newList->add = &add_SinglyLinkedList;
   newList->toString = &toString_SinglyLinkedList;
+  newList->reverse = &reverse_SinglyLinkedList;
   return newList;
 }
 

@@ -33,8 +33,20 @@ void testLinkedList() {
   printf("LL=%s\n", sll->toString(sll)->buf);
 }
 
+void testLinkedListReverse() {
+  SinglyLinkedList *sll = newSinglyLinkedList();
+  sll
+    ->add(sll, fromCharBuf("1", 1))
+    ->add(sll, fromCharBuf("2", 1))
+    ->add(sll, fromCharBuf("123", 3));
+
+  sll->reverse(sll);
+
+  printf("LL=%s\n", sll->toString(sll)->buf);
+}
+
 int main() {
-  testLinkedList();
+  testLinkedListReverse();
   
   return 0;
 }

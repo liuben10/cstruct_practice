@@ -13,7 +13,7 @@ typedef struct String {
   struct String*(*append)(struct String *self, struct String *toAppend);
   struct String*(*appendBulk)(struct String * src, char * buf, int N);
   struct String*(*concat)(struct String src, struct String dest);
-  char*(*toString)(struct String self);
+  char*(*toString)(struct String * self);
   int(*size)(struct String *this);
 } String;
 
@@ -70,8 +70,8 @@ int size_String(struct String * string) {
   return string->tail;
 }
 
-char * toString_String(struct String src) {
-  return nullTerminated(src.buf, src.tail);
+char * toString_String(struct String * src) {
+  return nullTerminated(src->buf, src->tail);
 }
 
 struct String * fromCharBuf(char * buf, int N) {

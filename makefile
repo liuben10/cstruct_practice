@@ -22,6 +22,12 @@ verbose:	compile.o
 string:	string.o
 	gcc string.o	-o	string_test
 
+test.o:
+	gcc	-c	test.c	-o	$@
+
+test: test.o
+	gcc	test.o	-o	test
+
 
 
 
@@ -29,3 +35,4 @@ clean:
 	-rm -f *.o
 	-rm -f compile
 	-rm -f string
+	-rm -f test

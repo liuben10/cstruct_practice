@@ -50,7 +50,7 @@ char * toString_IntVector(struct IntVector * vector) {
     resultString->appendBulk(resultString, itoa(vector->buf[i]), numDigits(vector->buf[i]));
     resultString->appendBulk(resultString, ", ", 2);
   }
-  return resultString->toString(*resultString);
+  return resultString->toString(resultString);
 }
 
 
