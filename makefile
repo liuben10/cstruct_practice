@@ -28,6 +28,14 @@ test.o:
 test: test.o
 	gcc	test.o	-o	test
 
+sha256.o:	sha256.c	sha256.h
+	gcc	-c	sha256.c	-o	$@	-w
+
+sha256_test.o:	sha256_test.c	sha256.h
+	gcc	-c	sha256_test.c 	-o	$@	-w
+
+sha256_test:	sha256_test.o	sha256.o
+	gcc	sha256_test.o	sha256.o	-o	sha256_test
 
 
 
@@ -36,3 +44,4 @@ clean:
 	-rm -f compile
 	-rm -f string
 	-rm -f test
+	-rm -f sha256_test
