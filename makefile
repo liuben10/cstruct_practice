@@ -1,4 +1,4 @@
-HEADERS=Util.h	Vector.h	String.h	LinkedList.h
+HEADERS=Util.h	Vector.h	String.h	LinkedList.h	class.h
 
 default:	compile
 
@@ -31,11 +31,11 @@ test: test.o
 sha256.o:	sha256.c	sha256.h
 	gcc	-c	sha256.c	-o	$@	-w
 
-sha256_test.o:	sha256_test.c	sha256.h
+sha256_test.o:	sha256_test.c	sha256.c	sha256.h
 	gcc	-c	sha256_test.c 	-o	$@	-w
 
-sha256_test:	sha256_test.o	sha256.o
-	gcc	sha256_test.o	sha256.o	-o	out/sha256_test
+sha256_test:	sha256_test.o
+	gcc	sha256_test.o	-o	out/sha256_test
 
 
 
@@ -45,3 +45,4 @@ clean:
 	-rm -f string
 	-rm -f test
 	-rm -f sha256_test
+	-rm -rf out/*

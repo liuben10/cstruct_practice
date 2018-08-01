@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <memory.h>
 #include <string.h>
-#include "sha256.h"
+#include "sha256.c"
 
 /*********************** FUNCTION DEFINITIONS ***********************/
 int sha256_test()
@@ -54,14 +54,15 @@ int sha256_test()
 }
 
 int sha256_crypto_test() {
+  printf("SEG FAULT?");
   BYTE text1[] = {"abc"};
+  
   BYTE hash1[SHA256_BLOCK_SIZE] = {0xba,0x78,0x16,0xbf,0x8f,0x01,0xcf,0xea,0x41,0x41,0x40,0xde,0x5d,0xae,0x22,0x23,
 	                                 0xb0,0x03,0x61,0xa3,0x96,0x17,0x7a,0x9c,0xb4,0x10,0xff,0x61,0xf2,0x00,0x15,0xad};
+  Crypto *crypto = construct_Crypto();
   
-  Crypto *crypto = malloc(sizeof(Crypto));
-  
-  BYTE *result = crypto->sha256(text1);
-  printf("%s\n", result);
+  /* BYTE *result = crypto->sha256(text1); */
+  /* printf("%s\n", result); */
   return 0;
 }
 
