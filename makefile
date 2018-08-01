@@ -11,22 +11,22 @@ string.o:	String.c	String.h
 
 
 compile:	compile.o
-	gcc compile.o	-o	compile
+	gcc compile.o	-o	out/compile
 
 compile_clean:
 	make clean && make compile
 
 verbose:	compile.o
-	gcc compile.o	-o	compile	-w
+	gcc compile.o	-o	out/compile	-w
 
 string:	string.o
-	gcc string.o	-o	string_test
+	gcc string.o	-o	out/string_test
 
 test.o:
 	gcc	-c	test.c	-o	$@
 
 test: test.o
-	gcc	test.o	-o	test
+	gcc	test.o	-o	out/test
 
 sha256.o:	sha256.c	sha256.h
 	gcc	-c	sha256.c	-o	$@	-w
@@ -35,7 +35,7 @@ sha256_test.o:	sha256_test.c	sha256.h
 	gcc	-c	sha256_test.c 	-o	$@	-w
 
 sha256_test:	sha256_test.o	sha256.o
-	gcc	sha256_test.o	sha256.o	-o	sha256_test
+	gcc	sha256_test.o	sha256.o	-o	out/sha256_test
 
 
 

@@ -4,3 +4,4 @@ bin/
 compile
 string_test
 *.out
+out/
