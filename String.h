@@ -15,11 +15,14 @@ typedef struct String {
   struct String*(*concat)(struct String src, struct String dest);
   char*(*toString)(struct String * self);
   int(*size)(struct String *this);
+  int(*compare)(struct String *this, struct String *other);
 } String;
 
 String * newString();
 
 int size_String(struct String *this);
+
+int compareIntString(struct String *this, struct String *other);
 
 struct String* appendChar_String(struct String * src, char c) {
   src->buf[src->tail] = c;
@@ -34,6 +37,7 @@ struct String* appendChar_String(struct String * src, char c) {
   }
   return src;
 }
+
 
 struct String* appendBulk_String(struct String * src, char * charBuf, int N) {
   for(int i = 0; i < N; i++) {
@@ -72,6 +76,17 @@ int size_String(struct String * string) {
 
 char * toString_String(struct String * src) {
   return nullTerminated(src->buf, src->tail);
+}
+
+
+int compareIntString(struct String *this, struct String *other) {
+  int v1 = atoi(this->buf);
+  int v2 = atoi(other->buf);
+  if (v1 - v2 < 0) {
+    return 0;
+  } else {
+    return 1;
+  }
 }
 
 struct String * fromCharBuf(char * buf, int N) {

@@ -58,6 +58,19 @@ void testHasCycle() {
   printf("\nHas Cycle?: %d\n", hasCycle);
 }
 
+void testSortSLL() {
+  SinglyLinkedList *sll = newSinglyLinkedList();
+  SLLNode *n1 = newSLLNode(fromCharBuf("1", 1));
+  SLLNode *n2 = newSLLNode(fromCharBuf("15", 2));
+  SLLNode *n5 = newSLLNode(fromCharBuf("2", 1));
+  sll->hp = n5;
+  sll->hp->next = n2;
+  sll->hp->next->next = n1;
+  sort_Int_SinglyLinkedList(sll);
+  printf("Sorted=%s\n", sll->toString(sll)->buf);
+
+}
+
 
 void testDoublyLinkedList() {
   DoublyLinkedList *dll = newDoublyLinkedList();
@@ -68,5 +81,6 @@ void testDoublyLinkedList() {
 int main() {
   testDoublyLinkedList();
   testHasCycle();
+  testSortSLL();
   return 0;
 }

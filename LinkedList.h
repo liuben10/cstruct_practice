@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "String.h"
 
 #pragma once
@@ -112,6 +113,51 @@ struct SLLNode * reverse_SinglyLinkedListHelper(struct SinglyLinkedList *this, s
 void reverse_SinglyLinkedList(struct SinglyLinkedList *this) {
   SLLNode *reversedTail = reverse_SinglyLinkedListHelper(this, this->hp);
   this->tp = reversedTail;
+}
+
+
+void sort_Int_SinglyLinkedList(struct SinglyLinkedList *this) {
+  SLLNode *prevFringe = NULL;
+  SLLNode *insFinder = this->hp;
+  SLLNode *fringe = this->hp;
+  int hasFoundInsertion = 0;
+  while (fringe != NULL) {
+    SLLNode *prevIns = NULL;
+    while (insFinder != fringe && !hasFoundInsertion) {
+      if (compareIntString(insFinder->val, fringe->val)) {
+	SLLNode *tmp = fringe->next;
+	fringe->next = insFinder;
+	if (prevFringe != NULL) {
+	  prevFringe->next = tmp;
+	}
+	if (prevIns == NULL) {
+	  this->hp = fringe;
+	  
+	} else {
+	  prevIns->next = fringe;
+	}	
+	fringe = tmp;
+	hasFoundInsertion = 1;
+      } else {
+	if (prevIns != NULL) {
+	  prevIns = prevIns->next;
+	} else {
+	  prevIns = this->hp;
+	}
+	insFinder = insFinder->next;
+      }
+    }
+    insFinder = this->hp;
+    if (!hasFoundInsertion) {
+      if (prevFringe == NULL) {
+	prevFringe = this->hp;
+      } else {
+	prevFringe = prevFringe->next;
+      }
+      fringe = fringe->next;
+    }
+    hasFoundInsertion = 0;
+  }
 }
 
 struct DoublyLinkedList * add_DoublyLinkedList(struct DoublyLinkedList *this, struct String *val) {
