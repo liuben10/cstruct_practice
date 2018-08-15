@@ -6,6 +6,13 @@
 
 char * nullTerminated(char * src, int N);
 
+int max(int x, int y) {
+  if (x < y) {
+    return y;
+  }
+  return x;
+}
+
 int * copyNewBuf(int * srcBuf, int srcIdx, int amountToCopy) {
   int * result = malloc(sizeof(int) * amountToCopy);
   for(int i = 0; i < amountToCopy; i++) {
@@ -13,6 +20,15 @@ int * copyNewBuf(int * srcBuf, int srcIdx, int amountToCopy) {
   }
   return result;		     
 }
+
+int abs(int n) {
+  if (n < 0) {
+    return -1 * n;
+  } else {
+    return n;
+  }
+}
+
 
 void copyIntBuf(int * destBuf, int destIdx, int * srcBuf, int srcIdx, int amountToCopy) {
   for(int i = 0; i < amountToCopy; i++) {

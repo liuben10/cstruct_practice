@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "Vector.h"
 #include "LinkedList.h"
+#include "Tree.h"
 
 void testVector() {
   IntVector * vector = newVector();
@@ -90,7 +91,24 @@ void testSortSLL() {
   sll->hp->next->next = n1;
   sort_Int_SinglyLinkedList(sll);
   printf("Sorted=%s\n", sll->toString(sll)->buf);
+}
 
+void testTreeBalanced() {
+  BinaryTree *root = newBinaryTree(10);
+  BinaryTree *a = newBinaryTree(5);
+  BinaryTree *b = newBinaryTree(8);
+  BinaryTree *c = newBinaryTree(12);
+  BinaryTree *d = newBinaryTree(14);
+  BinaryTree *e = newBinaryTree(16);
+  b->left = d;
+  b->right = e;
+  a->left = b;
+  a->left = b;
+  a->right = c;
+  root->left = a;
+  root->right = b;
+  
+  printf("Is balanced: %d\n", isBalanced(raoot));
 }
 
 
@@ -101,10 +119,11 @@ void testDoublyLinkedList() {
 }
 
 int main() {
-  testDoublyLinkedList();
-  testHasCycle();
-  testSortSLL();
-  testVectorPartition();
-  testQuickSort();
+  /* testDoublyLinkedList(); */
+  /* testHasCycle(); */
+  /* testSortSLL(); */
+  /* testVectorPartition(); */
+  /* testQuickSort(); */
+  testTreeBalanced();
   return 0;
 }

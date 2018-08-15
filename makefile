@@ -1,4 +1,4 @@
-HEADERS=Util.h	Vector.h	String.h	LinkedList.h	class.h	HashMap.h
+HEADERS=Util.h	Vector.h	String.h	LinkedList.h	class.h	HashMap.h	Tree.h
 
 default:	compile
 
@@ -33,6 +33,7 @@ test.o:
 
 test: test.o
 	gcc	test.o	-o	out/test
+
 
 sha256.o:	sha256.c	sha256.h
 	gcc	-c	sha256.c	-o	$@	-w
