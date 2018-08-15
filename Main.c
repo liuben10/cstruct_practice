@@ -23,6 +23,28 @@ void testVector() {
   printf("Vector=%s\n", vector->toString(vector)); 
 }
 
+void testVectorPartition() {
+  int buf[] = {5, 3, 2};
+  partition(buf, 0, 3);
+  printf("[");
+  for(int i = 0; i < 3; i++) {
+    printf("%d->%d,", i, buf[i]);
+  }
+  printf("]\n");
+
+}
+
+void testQuickSort() {
+  printf("\n===========Testing Quicksort===========\n");
+  int buf2[] = {5, 3, 9, 11, 2, 4, 13};
+  sort(buf2, 0, 7);
+  printf("[");
+  for(int i = 0; i < 7; i++) {
+    printf("%d->%d,", i, buf2[i]);
+  }
+  printf("]\n");
+}
+
 void testLinkedList() {
   SinglyLinkedList *sll = newSinglyLinkedList();
   sll
@@ -82,5 +104,7 @@ int main() {
   testDoublyLinkedList();
   testHasCycle();
   testSortSLL();
+  testVectorPartition();
+  testQuickSort();
   return 0;
 }

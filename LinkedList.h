@@ -86,6 +86,7 @@ int hasCycle_SinglyLinkedList(struct SinglyLinkedList *sll) {
   }
 }
 
+
 struct SinglyLinkedList * add_SinglyLinkedList(struct SinglyLinkedList *this, struct String *val) {
   if (this->hp == NULL) {
     this->tp = newSLLNode(val);

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "Util.h"
 #include "String.h"
 #pragma once
@@ -66,6 +67,51 @@ int remove_IntVector(struct IntVector * vector) {
   } else {
     return 0;
   }
+}
+
+void swap(int *buf, int N, int i, int j) {
+  printf("Swapping: N=%d, i=%d, j=%d\n", N, i, j);
+  if (i >= N || j >= N) {
+    printf("Error, i and j must be less than N");
+    exit(1);
+  } else {
+    int tmp = buf[i];
+    buf[i] = buf[j];
+    buf[j] = tmp;
+  }
+}
+
+
+int partition(int *buffer, int startIdx, int N) {
+  printf("Partitioning startIdx=%d, N=%d\n", startIdx, N);
+  srand(time(0));
+  int partitionIdx = (rand() % N) + startIdx;
+  printf("partitionIdx=%d\n", partitionIdx);
+  int partition = buffer[partitionIdx];
+  swap(buffer, N + startIdx, partitionIdx, startIdx + N - 1);
+  int slow = startIdx;
+  int fast;
+  for(fast = startIdx + 1; fast < N + startIdx; fast++) {
+    if (buffer[fast] < partition) {
+      swap(buffer, N + startIdx, fast, slow);
+    }
+    if (buffer[slow] < partition) {
+      slow += 1;
+    }
+  }
+
+  swap(buffer, N + startIdx, startIdx + N - 1, slow);
+  return slow;
+}
+
+void sort(int *buf, int startIdx, int N) {
+  printf("N=%d, startIdx=%d\n", N, startIdx);
+  if (N <= 1) {
+    return;
+  }
+  int partitionIdx = partition(buf, startIdx, N);
+  sort(buf, startIdx, partitionIdx - startIdx);
+  sort(buf, partitionIdx, N - partitionIdx);
 }
 
 

@@ -1,4 +1,4 @@
-HEADERS=Util.h	Vector.h	String.h	LinkedList.h	class.h
+HEADERS=Util.h	Vector.h	String.h	LinkedList.h	class.h	HashMap.h
 
 default:	compile
 
@@ -21,6 +21,12 @@ verbose:	compile.o
 
 string:	string.o
 	gcc string.o	-o	out/string_test
+
+hashmap.o:	HashMap.c	HashMap.h
+	gcc	-c	HashMap.c	-o	$@	-w
+
+hashmap:	hashmap.o
+	gcc	hashmap.o	-o	out/hashmap
 
 test.o:
 	gcc	-c	test.c	-o	$@
@@ -45,4 +51,5 @@ clean:
 	-rm -f string
 	-rm -f test
 	-rm -f sha256_test
+	-rm -f hashmap
 	-rm -rf out/*
