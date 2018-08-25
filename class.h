@@ -4,10 +4,10 @@
 #define VA_ARGS  __VA_ARGS__
 
 #define THIS(T)					\
-  struct T *this;				\
+  T *this					\
 
 #define NEW(T,...)				\
-  struct T *(*new)(__VA_ARGS__);			\
+  T *(*new)(__VA_ARGS__)			\
     
 #define CLASS(T)				\
   THIS(T)					\

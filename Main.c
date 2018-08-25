@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "Vector.h"
 #include "LinkedList.h"
+#include "Tree.h"
 
 void testVector() {
   IntVector * vector = newVector();
@@ -21,6 +22,28 @@ void testVector() {
   int removed = vector->remove(vector);
   printf("Removed=%d\n", removed);
   printf("Vector=%s\n", vector->toString(vector)); 
+}
+
+void testVectorPartition() {
+  int buf[] = {5, 3, 2};
+  partition(buf, 0, 3);
+  printf("[");
+  for(int i = 0; i < 3; i++) {
+    printf("%d->%d,", i, buf[i]);
+  }
+  printf("]\n");
+
+}
+
+void testQuickSort() {
+  printf("\n===========Testing Quicksort===========\n");
+  int buf2[] = {5, 3, 9, 11, 2, 4, 13};
+  sort(buf2, 0, 7);
+  printf("[");
+  for(int i = 0; i < 7; i++) {
+    printf("%d->%d,", i, buf2[i]);
+  }
+  printf("]\n");
 }
 
 void testLinkedList() {
@@ -58,6 +81,36 @@ void testHasCycle() {
   printf("\nHas Cycle?: %d\n", hasCycle);
 }
 
+void testSortSLL() {
+  SinglyLinkedList *sll = newSinglyLinkedList();
+  SLLNode *n1 = newSLLNode(fromCharBuf("1", 1));
+  SLLNode *n2 = newSLLNode(fromCharBuf("15", 2));
+  SLLNode *n5 = newSLLNode(fromCharBuf("2", 1));
+  sll->hp = n5;
+  sll->hp->next = n2;
+  sll->hp->next->next = n1;
+  sort_Int_SinglyLinkedList(sll);
+  printf("Sorted=%s\n", sll->toString(sll)->buf);
+}
+
+void testTreeBalanced() {
+  BinaryTree *root = newBinaryTree(10);
+  BinaryTree *a = newBinaryTree(5);
+  BinaryTree *b = newBinaryTree(8);
+  BinaryTree *c = newBinaryTree(12);
+  BinaryTree *d = newBinaryTree(14);
+  BinaryTree *e = newBinaryTree(16);
+  b->left = d;
+  b->right = e;
+  a->left = b;
+  a->left = b;
+  a->right = c;
+  root->left = a;
+  root->right = b;
+  
+  printf("Is balanced: %d\n", isBalanced(raoot));
+}
+
 
 void testDoublyLinkedList() {
   DoublyLinkedList *dll = newDoublyLinkedList();
@@ -66,7 +119,11 @@ void testDoublyLinkedList() {
 }
 
 int main() {
-  testDoublyLinkedList();
-  testHasCycle();
+  /* testDoublyLinkedList(); */
+  /* testHasCycle(); */
+  /* testSortSLL(); */
+  /* testVectorPartition(); */
+  /* testQuickSort(); */
+  testTreeBalanced();
   return 0;
 }
