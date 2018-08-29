@@ -1,4 +1,4 @@
-HEADERS=Util.h	Vector.h	String.h	LinkedList.h	class.h	HashMap.h	Tree.h
+HEADERS=Util.h	Vector.h	String.h	LinkedList.h	class.h	HashMap.h	Tree.h	Number.h
 
 default:	compile
 

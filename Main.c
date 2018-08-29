@@ -3,6 +3,7 @@
 #include "Vector.h"
 #include "LinkedList.h"
 #include "Tree.h"
+#include "Number.h"
 
 void testVector() {
   IntVector * vector = newVector();
@@ -93,6 +94,16 @@ void testSortSLL() {
   printf("Sorted=%s\n", sll->toString(sll)->buf);
 }
 
+void testNumber() {
+  int initial[10] = {3,  2,  4,  5,  6,  2,  7,  8,  9,  1};
+  Number * initNum = newNumber(initial, 10);
+  int toAdd[3] = {2, 1, 1};
+  Number *numToAdd = newNumber(toAdd, 3);
+  Number *added = add_Number(initNum, numToAdd);
+  String *res = added->toString(added);
+  res->print(res);
+}
+
 void testTreeBalanced() {
   BinaryTree *root = newBinaryTree(10);
   BinaryTree *a = newBinaryTree(5);
@@ -108,7 +119,7 @@ void testTreeBalanced() {
   root->left = a;
   root->right = b;
   
-  printf("Is balanced: %d\n", isBalanced(raoot));
+  printf("Is balanced: %d\n", isBalanced(root));
 }
 
 
@@ -124,6 +135,7 @@ int main() {
   /* testSortSLL(); */
   /* testVectorPartition(); */
   /* testQuickSort(); */
-  testTreeBalanced();
+  /* testTreeBalanced(); */
+  testNumber();
   return 0;
 }

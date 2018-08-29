@@ -16,6 +16,7 @@ typedef struct String {
   char*(*toString)(struct String * self);
   int(*size)(struct String *this);
   int(*compare)(struct String *this, struct String *other);
+  void(*print)(struct String *this);
 } String;
 
 String * newString();
@@ -74,10 +75,13 @@ int size_String(struct String * string) {
   return string->tail;
 }
 
+void print_String(struct String *this) {
+  printf("%s\n", this->buf);
+}
+
 char * toString_String(struct String * src) {
   return nullTerminated(src->buf, src->tail);
 }
-
 
 int compareIntString(struct String *this, struct String *other) {
   int v1 = atoi(this->buf);
@@ -106,5 +110,6 @@ String * newString() {
   resultStr->concat = &concat_String;
   resultStr->toString = &toString_String;
   resultStr->size = &size_String;
+  resultStr->print = &print_String;
   return resultStr;
 }
